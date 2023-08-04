@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:dr_plus/services/apiService.dart';
+import 'package:dr_plus/services/api_methods.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,7 +31,7 @@ class _AwrenessScreenState extends State<AwrenessScreen> {
     var headers = {
       'Cookie': 'ci_session=cdbd346aeb637d4f574b95b7476f4f6c0be73896'
     };
-    var request = http.MultipartRequest('POST', Uri.parse('https://developmentalphawizz.com/dr_booking/user/app/v1/api/doctor_awareness'));
+    var request = http.MultipartRequest('POST', Uri.parse('${ApiService.doctorAwareness}'));
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
@@ -38,6 +40,7 @@ class _AwrenessScreenState extends State<AwrenessScreen> {
     print('___Divya_______${finalResult}_________');
     setState(() {
       getAwrenessModel =  finalResult;
+
     });
     }
     else {
@@ -45,9 +48,25 @@ class _AwrenessScreenState extends State<AwrenessScreen> {
     }
 
   }
+
+//   int _expandedIndex = 1;
+//   bool isOpen = true;
+//
+//   void _toggleExpansion(int index) {
+//     setState(() {
+//       if (_expandedIndex == index) {
+//         isOpen = true;
+//       } else if(_expandedIndex == index) {
+//         isOpen = true;
+//       }
+//     });
+//   }
+// var selectIndex;
+int? selected = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+      Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text('Awareness '),
@@ -61,71 +80,126 @@ class _AwrenessScreenState extends State<AwrenessScreen> {
                     AppColors.secondary
                   ])),
         ),
-        leading: InkWell(
+            leading: InkWell(
             onTap: () {
               Get.back();
             },
             child: Icon(Icons.arrow_back_ios)),
-        actions: const [],
+
       ),
-      body: Column(
-        children: [
-          SizedBox(height: 20,),
-      getAwrenessModel == null || getAwrenessModel == " "? const Center(child: CircularProgressIndicator()): getAwrenessModel!.data!.length == 0 ? Center(child: Text("No data to show"),) :
-          ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-             itemCount: getAwrenessModel!.data!.length,
-              itemBuilder:
-                  (BuildContext context ,int index){
-                return Card(
-                  elevation: 3,
-                  margin: const EdgeInsets.symmetric(horizontal:10,vertical:5),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)
+      body:
+      getAwrenessModel?.data == null ? Center(child: CircularProgressIndicator()):  getAwrenessModel?.data?.length == 0 ?Text("No Awareness"): Container(
+        height: MediaQuery.of(context).size.height/1,
+        child: ListView.builder(
+          key: Key('builder ${selected.toString()}'),
+          itemCount:getAwrenessModel?.data?.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(0),
+                  border: Border.all(color: AppColors.black)
+                ),
+                child: ExpansionTile(
+
+                  textColor: AppColors.black,
+                  iconColor: AppColors.black,
+                  collapsedTextColor: AppColors.whit,
+                  collapsedIconColor: AppColors.whit,
+                  collapsedBackgroundColor: AppColors.secondary,
+                      key:  Key(index.toString()),
+                      initiallyExpanded: index == selected ,
+                  title: Row(
+                    children: [
+                      Container(
+                          height: 50,
+                          width: 50,
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network("${getAwrenessModel?.data?[index].icon}",fit: BoxFit.fill,))),
+                              SizedBox(width: 5,),
+                              Text('${getAwrenessModel?.data?[index].title}'),
+                    ],
                   ),
-                  child:Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Title: "),
-                                SizedBox(height: 5,),
-                                Text("Aware Input: "),
-                                SizedBox(height: 5,),
-                                Text("Aware Language: "),
-                                SizedBox(height: 5,),
-                                Text("Date: "),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("${getAwrenessModel!.data![index].title}",style: TextStyle(color: AppColors.black,fontWeight: FontWeight.w600),),
-                                SizedBox(height: 5,),
-                                Text("${getAwrenessModel!.data![index].awareInput}",style: TextStyle(color: AppColors.black,fontWeight: FontWeight.w600),),
-                                SizedBox(height: 5,),
-                                Text("${getAwrenessModel!.data![index].awareLanguage}",style: TextStyle(color: AppColors.black,fontWeight: FontWeight.w600),),
-                                SizedBox(height: 5,),
-                                Text("${getAwrenessModel!.data![index].date}",style: TextStyle(color: AppColors.black,fontWeight: FontWeight.w600),),
-                              ],
-                            )
-                          ],
-                        )
+                  onExpansionChanged: (isExpanded) {
 
-                      ]
+                        if(isExpanded) {
+                          setState(()  {
+                          const Duration(milliseconds: 2000);
+                            selected = index;
+                          });
 
+                        }else{
+                          setState(() {
+                            selected = -1;
+                          });
+
+                        }
+
+
+                  },
+                  children:[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+
+                          height: 100,
+                          width: 200,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                              child: Image.network("${getAwrenessModel?.data?[index].image}",fit: BoxFit.fill,))),
                     ),
-                  ),
-                );
-              }),
-        ],),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                          width: 350,
+                          child: Text("${getAwrenessModel!.data![index].description}",overflow: TextOverflow.ellipsis,maxLines: 10,style: TextStyle(color: AppColors.black),)),
+                    )
+
+                  ],
+                ),
+
+              ),
+
+            );
+
+          },
+
+        ),
+      ),
+    );
+  }
+
+}
+class MyExpansionTile extends StatelessWidget {
+  final List<bool> isExpandedList;
+  final Function(int) onToggleExpansion;
+
+  MyExpansionTile({required this.isExpandedList, required this.onToggleExpansion});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: isExpandedList.length,
+      itemBuilder: (context, index) {
+        return ExpansionTile(
+          title: Text('Tile $index'),
+          onExpansionChanged: (isExpanded) {
+            onToggleExpansion(index);
+          },
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('Info 1'),
+            ),
+
+          ],
+          initiallyExpanded: isExpandedList[index],
+        );
+      },
     );
   }
 }
+

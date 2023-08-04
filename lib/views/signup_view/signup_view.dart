@@ -387,7 +387,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             title: 'Submit',
                             onPress: () {
 
-                              if( controller.selectedState == null ||controller.selectedCity==null||controller.selectedPlace==null){
+                              if( controller.selectedState == null ||controller.selectedCity==null){
                                 Fluttertoast.showToast(msg: 'Please select all fields');
                               }
                               else{

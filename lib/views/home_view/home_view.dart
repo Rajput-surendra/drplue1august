@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                onTap: () {
                 Navigator.pop(context);
                },
-                 child: Text('${controller.signupController.selectedPlace}',style: const TextStyle(fontWeight: FontWeight.w400,fontSize:16),)),
+                 child: Text('${controller.signupController.selectedCity}',style: const TextStyle(fontWeight: FontWeight.w400,fontSize:16),)),
             // leading: InkWell(
             //     onTap: () {
             //       //controller.getDrawer();
@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           drawer: controller.getDrawer(),
           //drawer: controller.scaffoldKey.currentState!.openDrawer(),
-          body: SingleChildScrollView(
+          body: controller.isBusy ? const Center(child: CircularProgressIndicator(color: AppColors.secondary,),) : SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const SizedBox(height: 15,),
-                controller.isBusy ? const Center(child: CircularProgressIndicator(color: AppColors.secondary,),)  :
+                // controller.isBusy ? const Center(child: CircularProgressIndicator(color: AppColors.secondary,),)  :
                     Stack(
                       alignment: Alignment.bottomCenter,
                       children: [
@@ -162,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                 const SizedBox(height: 20,),
-                controller.isBusy ? const Center(child: CircularProgressIndicator(color: AppColors.secondary,),) : SizedBox(
+                SizedBox(
                   // height: heightSize/0.7,
                   child: GridView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 10),

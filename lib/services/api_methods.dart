@@ -23,10 +23,11 @@ class ApiMethods {
 
 
 }
-
+ const imageUrl = 'https://developmentalphawizz.com/dr_booking/';
 class ApiEndPoint{
 
   static const baseAppUrl = 'https://developmentalphawizz.com/dr_booking/user/app/v1/api/';
+
   static const String getLogin = baseAppUrl +'login';
   static const String verifyOtp = baseAppUrl +'verify_user';
   static const String bookAppointment = baseAppUrl +'book_appointment';

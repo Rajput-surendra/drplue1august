@@ -1,6 +1,6 @@
 /// error : false
-/// message : "Awareness Get Successfull"
-/// data : [{"id":"1","title":"test","aware_input":"poster","aware_language":"Hindi","date":"2023-06-07 18:04:13","image":"uploads/media/2023/647df12b82c0f.jpg","doctor_id":"365","status":"0","thumbnail":""}]
+/// message : "Doctor Awareness"
+/// data : [{"id":"6","title":"Allergist","description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf","image":"https://developmentalphawizz.com/dr_booking/uploads/media/2023/Group_4.png","icon":"https://developmentalphawizz.com/dr_booking/uploads/media/2023/Group_4.png","created_at":"2023-07-28 17:23:02","updated_at":"2023-07-26 17:43:41","is_collapsed":true},{"id":"7","title":"Dentist","description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf","image":"https://developmentalphawizz.com/dr_booking/uploads/media/2023/Group_4.png","icon":"https://developmentalphawizz.com/dr_booking/uploads/media/2023/Group_4.png","created_at":"2023-07-28 17:22:50","updated_at":"2023-07-26 17:43:41","is_collapsed":true},{"id":"8","title":"Anaesthesiologist","description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf","image":"https://developmentalphawizz.com/dr_booking/uploads/media/2023/Group_4.png","icon":"https://developmentalphawizz.com/dr_booking/uploads/media/2023/Group_4.png","created_at":"2023-07-28 17:22:36","updated_at":"2023-07-26 17:43:41","is_collapsed":true},{"id":"9","title":"Dermatologist","description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf","image":"https://developmentalphawizz.com/dr_booking/uploads/media/2023/Group_4.png","icon":"https://developmentalphawizz.com/dr_booking/uploads/media/2023/Group_4.png","created_at":"2023-07-28 17:22:19","updated_at":"2023-07-26 17:43:41","is_collapsed":true},{"id":"11","title":"Cardiologist","description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf 1","image":"https://developmentalphawizz.com/dr_booking/uploads/media/2023/Group_4.png","icon":"https://developmentalphawizz.com/dr_booking/uploads/media/2023/Group_4.png","created_at":"2023-07-28 17:22:01","updated_at":"2023-07-26 17:43:41","is_collapsed":true},{"id":"12","title":"Endocrinologist","description":"Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf","image":"https://developmentalphawizz.com/dr_booking/uploads/media/2023/Group_4.png","icon":"https://developmentalphawizz.com/dr_booking/uploads/media/2023/Group_4.png","created_at":"2023-07-28 17:21:37","updated_at":"2023-07-26 17:43:41","is_collapsed":true}]
 
 class GetAwrenessModel {
   GetAwrenessModel({
@@ -48,98 +48,94 @@ GetAwrenessModel copyWith({  bool? error,
 
 }
 
-/// id : "1"
-/// title : "test"
-/// aware_input : "poster"
-/// aware_language : "Hindi"
-/// date : "2023-06-07 18:04:13"
-/// image : "uploads/media/2023/647df12b82c0f.jpg"
-/// doctor_id : "365"
-/// status : "0"
-/// thumbnail : ""
+/// id : "6"
+/// title : "Allergist"
+/// description : "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf"
+/// image : "https://developmentalphawizz.com/dr_booking/uploads/media/2023/Group_4.png"
+/// icon : "https://developmentalphawizz.com/dr_booking/uploads/media/2023/Group_4.png"
+/// created_at : "2023-07-28 17:23:02"
+/// updated_at : "2023-07-26 17:43:41"
+/// is_collapsed : true
 
 class Data {
   Data({
       String? id, 
       String? title, 
-      String? awareInput, 
-      String? awareLanguage, 
-      String? date, 
+      String? description, 
       String? image, 
-      String? doctorId, 
-      String? status, 
-      String? thumbnail,}){
+      String? icon, 
+      String? createdAt, 
+      String? updatedAt,
+      bool? isExpaind
+      }){
     _id = id;
     _title = title;
-    _awareInput = awareInput;
-    _awareLanguage = awareLanguage;
-    _date = date;
+    _description = description;
     _image = image;
-    _doctorId = doctorId;
-    _status = status;
-    _thumbnail = thumbnail;
+    _icon = icon;
+    _createdAt = createdAt;
+    _updatedAt = updatedAt;
+    isExpaind =  isExpaind;
+
 }
 
   Data.fromJson(dynamic json) {
     _id = json['id'];
     _title = json['title'];
-    _awareInput = json['aware_input'];
-    _awareLanguage = json['aware_language'];
-    _date = json['date'];
+    _description = json['description'];
     _image = json['image'];
-    _doctorId = json['doctor_id'];
-    _status = json['status'];
-    _thumbnail = json['thumbnail'];
+    _icon = json['icon'];
+    _createdAt = json['created_at'];
+    _updatedAt = json['updated_at'];
+     isExpaind = false;
+
+
   }
   String? _id;
   String? _title;
-  String? _awareInput;
-  String? _awareLanguage;
-  String? _date;
+  String? _description;
   String? _image;
-  String? _doctorId;
-  String? _status;
-  String? _thumbnail;
+  String? _icon;
+  String? _createdAt;
+  String? _updatedAt;
+  bool?   isExpaind;
+
 Data copyWith({  String? id,
   String? title,
-  String? awareInput,
-  String? awareLanguage,
-  String? date,
+  String? description,
   String? image,
-  String? doctorId,
-  String? status,
-  String? thumbnail,
+  String? icon,
+  String? createdAt,
+  String? updatedAt,
 }) => Data(  id: id ?? _id,
   title: title ?? _title,
-  awareInput: awareInput ?? _awareInput,
-  awareLanguage: awareLanguage ?? _awareLanguage,
-  date: date ?? _date,
+  description: description ?? _description,
   image: image ?? _image,
-  doctorId: doctorId ?? _doctorId,
-  status: status ?? _status,
-  thumbnail: thumbnail ?? _thumbnail,
+  icon: icon ?? _icon,
+  createdAt: createdAt ?? _createdAt,
+  updatedAt: updatedAt ?? _updatedAt,
+
+
 );
   String? get id => _id;
   String? get title => _title;
-  String? get awareInput => _awareInput;
-  String? get awareLanguage => _awareLanguage;
-  String? get date => _date;
+  String? get description => _description;
   String? get image => _image;
-  String? get doctorId => _doctorId;
-  String? get status => _status;
-  String? get thumbnail => _thumbnail;
+  String? get icon => _icon;
+  String? get createdAt => _createdAt;
+  String? get updatedAt => _updatedAt;
+
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;
     map['title'] = _title;
-    map['aware_input'] = _awareInput;
-    map['aware_language'] = _awareLanguage;
-    map['date'] = _date;
+    map['description'] = _description;
     map['image'] = _image;
-    map['doctor_id'] = _doctorId;
-    map['status'] = _status;
-    map['thumbnail'] = _thumbnail;
+    map['icon'] = _icon;
+    map['created_at'] = _createdAt;
+    map['updated_at'] = _updatedAt;
+
     return map;
   }
 

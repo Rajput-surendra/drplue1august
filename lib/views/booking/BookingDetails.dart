@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dr_plus/services/api_methods.dart';
+import 'package:dr_plus/views/home_view/home_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -126,7 +127,7 @@ class _BookingDetailsState extends State<BookingDetails> {
           ),
           leading: InkWell(
               onTap: () {
-                Get.back();
+               Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
               },
               child: Icon(Icons.arrow_back_ios)),
           actions: const [],
